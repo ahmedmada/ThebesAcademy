@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1091281872395",
+    "firebase_url": "https://thebesacademy-6ea39.firebaseio.com",
+    "project_id": "thebesacademy-6ea39",
+    "storage_bucket": "thebesacademy-6ea39.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1091281872395:android:97ea17cd731d63a4",
+        "android_client_info": {
+          "package_name": "com.eaapps.thebesacademy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1091281872395-5qldhdikiiafn37e1147f4ltcqon1o39.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBMk2D66GJ-riK1CdQ9YDKYZ_alGwUGK2I"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

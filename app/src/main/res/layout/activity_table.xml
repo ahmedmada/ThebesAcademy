@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.eaapps.thebesacademy.Table.Table"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_above="@id/addRow">
+
+        <ScrollView
+            android:id="@+id/layout"
+            android:layout_height="match_parent"
+            android:scrollbars="horizontal|vertical"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:scrollbarStyle="outsideInset"
+            android:fillViewport="true"
+            android:layout_margin="5dp">
+
+            <HorizontalScrollView
+                android:id="@+id/horizontalView"
+                android:layout_height="match_parent"
+                android:scrollbars="horizontal|vertical"
+                android:layout_width="match_parent"
+                >
+
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/table"
+                    android:orientation="horizontal"
+                    ></TableLayout>
+            </HorizontalScrollView>
+        </ScrollView>
+
+        <Button
+            android:id="@+id/addCol"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="5dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/ic_add_black_24dp"/>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/addRow"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_margin="5dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:background="@drawable/ic_add_black_24dp" />
+</RelativeLayout>

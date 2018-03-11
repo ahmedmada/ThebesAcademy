@@ -1,0 +1,44 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorControlNormal">@color/colorMain</item>
+        <item name="colorControlActivated">@color/colorMain</item>
+        <item name="colorControlHighlight">@color/colorMain</item>
+    </style>
+    <style name="Widget.Design.TextInputLayout" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="hintTextAppearance">@style/AppTheme.TextFloatLabelAppearance</item>
+        <item name="errorTextAppearance">@style/AppTheme.TextErrorAppearance</item>
+        <item name="counterTextAppearance">@style/TextAppearance.Design.Counter</item>
+        <item name="counterOverflowTextAppearance">@style/TextAppearance.Design.Counter.Overflow
+        </item>
+    </style>
+
+    <style name="AppTheme.TextFloatLabelAppearance" parent="TextAppearance.Design.Hint">
+        <!-- Floating label appearance here -->
+        <item name="android:textColor">@color/colorMain</item>
+        <item name="android:textSize">24sp</item>
+        <item name="colorControlNormal">@color/colorMain</item>
+        <item name="colorControlActivated">@color/colorMain</item>
+        <item name="colorControlHighlight">@color/colorMain</item>
+    </style>
+
+    <style name="AppTheme.TextErrorAppearance" parent="TextAppearance.Design.Error">
+        <!-- Error message appearance here -->
+        <item name="android:textColor">#ff0000</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="Custom" parent="android:Theme.DeviceDefault.Dialog">
+        <item name="DialogTitleAppearance">@color/colorMain</item>
+        <item name="DialogTitleText">Please Wait</item>
+        <item name="DialogSpotColor">@color/white</item>
+        <item name="android:windowBackground">@color/colorMain</item>
+        <item name="DialogSpotCount">8</item>
+    </style>
+
+</resources>

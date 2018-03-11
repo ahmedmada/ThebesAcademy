@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">ThebesAcademy</string>
+    <string name="name_app">Integrated Thebes Institutes</string>
+    <string name="btn_admin">admin</string>
+    <string name="btn_teacher">teacher</string>
+    <string name="btn_student">student</string>
+    <string name="userid">UserId</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="name">Name</string>
+    <string name="phone">Phone</string>
+    <string name="master">Master</string>
+    <string name="section">Section</string>
+
+    <string name="btn_login">Login</string>
+    <string name="btn_sigup">No account yet? Create Now</string>
+    <string name="sign_up_title">Create Account</string>
+    <string name="btn_register">Register</string>
+</resources>
