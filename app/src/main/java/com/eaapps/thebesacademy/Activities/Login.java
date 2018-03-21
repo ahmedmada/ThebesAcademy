@@ -9,11 +9,11 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 
-import com.eaapps.thebesacademy.Chat.MainActivity;
+import com.eaapps.thebesacademy.Files.ReadFilesDoctors;
+import com.eaapps.thebesacademy.Files.UploadFile;
 import com.eaapps.thebesacademy.Model.Profile;
 import com.eaapps.thebesacademy.Model.RetrieveData;
 import com.eaapps.thebesacademy.R;
-import com.eaapps.thebesacademy.Table.Table;
 import com.eaapps.thebesacademy.Utils.Constants;
 import com.eaapps.thebesacademy.Utils.EATextInputEditText;
 import com.eaapps.thebesacademy.Utils.StoreKey;
@@ -55,7 +55,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         retrieveData = new RetrieveData<Profile>(Login.this) {
         };
 
-        startActivity(new Intent(Login.this, Table.class));
     }
 
     private void init() {
@@ -91,6 +90,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 //                                                        Constants.homeClasses(items.get(spinner.getSelectedItemPosition()))));
 
 //                                                startActivity(new Intent(Login.this, Table.class));
+                                                startActivity(new Intent(Login.this, ReadFilesDoctors.class));
+
                                             }).addOnFailureListener(e -> e.printStackTrace());
 
                                         }

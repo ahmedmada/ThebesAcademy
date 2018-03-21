@@ -10,6 +10,7 @@
         <item name="colorControlActivated">@color/colorMain</item>
         <item name="colorControlHighlight">@color/colorMain</item>
     </style>
+
     <style name="Widget.Design.TextInputLayout" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="hintTextAppearance">@style/AppTheme.TextFloatLabelAppearance</item>
         <item name="errorTextAppearance">@style/AppTheme.TextErrorAppearance</item>
@@ -40,5 +41,9 @@
         <item name="android:windowBackground">@color/colorMain</item>
         <item name="DialogSpotCount">8</item>
     </style>
+
+    <style name="AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 </resources>

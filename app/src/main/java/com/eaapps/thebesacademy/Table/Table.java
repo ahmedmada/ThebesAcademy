@@ -71,10 +71,7 @@ public class Table extends AppCompatActivity {
 //                tv.setLayoutParams(params);
                 tr.addView(tv);
             }
-
-
             table.addView(tr);
         }
-
     }
 }

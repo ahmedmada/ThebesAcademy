@@ -5,6 +5,7 @@
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -37,18 +38,26 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-        <activity android:name=".Chat.MainActivity"></activity>
+
+        <activity android:name=".Chat.MainActivity" />
         <activity
             android:name=".Chat.UsersActivity"
             android:parentActivityName=".Chat.MainActivity" />
         <activity
             android:name=".Chat.ChatActivity"
             android:parentActivityName=".Chat.MainActivity" />
-
-
-
-        <activity android:name=".Table.Table"
-            android:screenOrientation="landscape"></activity>
+        <activity
+            android:name=".Table.Table"
+            android:screenOrientation="landscape" />
+        <activity android:name=".Chat.ChatRoom" />
+        <activity android:name=".Files.UploadFile" />
+        <activity
+            android:name=".Files.ReadFilesDoctors"
+            android:label="@string/title_activity_read_files_doctors"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity android:name=".Files.FileActivity" />
+        <activity android:name=".Files.DownloadFile" />
+        <activity android:name=".Files.ViewPDF"></activity>
     </application>
 
 </manifest>
