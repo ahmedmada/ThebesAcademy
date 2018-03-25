@@ -57,7 +57,8 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity android:name=".Files.FileActivity" />
         <activity android:name=".Files.DownloadFile" />
-        <activity android:name=".Files.ViewPDF"></activity>
+        <activity android:name=".Files.ViewPDF" />
+        <activity android:name=".PDF.PdfListActivity"></activity>
     </application>
 
 </manifest>

@@ -19,6 +19,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.eaapps.thebesacademy.PDF.PdfListActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -31,7 +32,11 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
+
 import com.eaapps.thebesacademy.R;
 
 public class UploadFile extends AppCompatActivity {
@@ -50,7 +55,7 @@ public class UploadFile extends AppCompatActivity {
     EditText ChapterName ;
 
     // Creating ImageView.
-    ImageView SelectImage;
+//    ImageView SelectImage;
 
     // Creating URI.
     Uri FilePathUri;
@@ -63,7 +68,7 @@ public class UploadFile extends AppCompatActivity {
     private FirebaseAuth mAuth;
 
     // Image request code for onActivityResult() .
-    int Image_Request_Code = 7;
+    int FILE_Request_Code = 7;
 
     ProgressDialog progressDialog ;
 
@@ -91,7 +96,7 @@ public class UploadFile extends AppCompatActivity {
         ChapterName = (EditText)findViewById(R.id.ChapterNameEditText);
 
         // Assign ID'S to image view.
-        SelectImage = (ImageView)findViewById(R.id.ShowImageView);
+//        SelectImage = (ImageView)findViewById(R.id.ShowImageView);
 
         // Assigning Id to ProgressDialog.
         progressDialog = new ProgressDialog(UploadFile.this);
@@ -101,13 +106,16 @@ public class UploadFile extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                // Creating intent.
-                Intent intent = new Intent();
+                Intent i = new Intent(UploadFile.this, PdfListActivity.class);
+                startActivityForResult(i, FILE_Request_Code);
 
-                // Setting intent type as image to select image from phone storage.
-                intent.setType("image/*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(intent, "Please Select Image"), Image_Request_Code);
+                // Creating intent.
+//                Intent intent = new Intent();
+//
+//                // Setting intent type as image to select image from phone storage.
+//                intent.setType("image/*");
+//                intent.setAction(Intent.ACTION_GET_CONTENT);
+//                startActivityForResult(Intent.createChooser(intent, "Please Select Image"), FILE_Request_Code);
 
 
 //                Intent intent = new Intent();
@@ -167,24 +175,31 @@ public class UploadFile extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         super.onActivityResult(requestCode, resultCode, data);
+        Log.v("bbbbbbbbbbbbb","bbbb");
+//        Log.v("bbbbbbbbbbbbb", String.valueOf(data.getData()));
+        Log.v("bbbbbbbbbbbbb",data.getStringExtra("filepath"));
 
-        if (requestCode == Image_Request_Code && resultCode == RESULT_OK && data != null && data.getData() != null) {
+        if (requestCode == FILE_Request_Code && resultCode == RESULT_OK &&
+                data != null && data.getStringExtra("filepath") != null) {
 
-            FilePathUri = data.getData();
+            Log.v("bbbbbbbbbbbbb","test");
+            Log.v("bbbbbbbbbbbbb",data.getStringExtra("filepath"));
 
+//            FilePathUri = data.getData();
+            FilePathUri = Uri.parse(data.getStringExtra("filepath"));
             try {
 
                 // Getting selected image into Bitmap.
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), FilePathUri);
+//                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), FilePathUri);
 
                 // Setting up bitmap selected image into ImageView.
-                SelectImage.setImageBitmap(bitmap);
+//                SelectImage.setImageBitmap(bitmap);
 
                 // After selecting image change choose button above text.
-                ChooseButton.setText("Image Selected");
+                ChooseButton.setText("File Selected");
 
             }
-            catch (IOException e) {
+            catch (Exception e) {
 
                 e.printStackTrace();
             }
@@ -210,7 +225,7 @@ public class UploadFile extends AppCompatActivity {
         if (FilePathUri != null) {
 
             // Setting progressDialog Title.
-            progressDialog.setTitle("Image is Uploading...");
+            progressDialog.setTitle("File is Uploading...");
 
             // Showing progressDialog.
             progressDialog.show();
@@ -218,81 +233,90 @@ public class UploadFile extends AppCompatActivity {
 
             // Creating second StorageReference.
             StorageReference storageReference2nd = storageReference.child(Storage_Path + System.currentTimeMillis() + "." + GetFileExtension(FilePathUri));
+//            InputStream stream = null;
+//            try {
+//                stream = new FileInputStream(new File(String.valueOf(FilePathUri)));
+//            } catch (FileNotFoundException e) {
+//                e.printStackTrace();
+//            }
+            Uri file = Uri.fromFile(new File(String.valueOf(FilePathUri)));
 
             // Adding addOnSuccessListener to second StorageReference.
-            storageReference2nd.putFile(FilePathUri)
-                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+//            if (stream != null) {
+                storageReference2nd.putFile(file)
+                        .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
-                            Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                                Uri downloadUrl = taskSnapshot.getDownloadUrl();
 
-                            // Getting image name from EditText and store into string variable.
-                            String chapter = ChapterName.getText().toString().trim();
-                            String subject = SubjectName.getText().toString().trim();
+                                // Getting image name from EditText and store into string variable.
+                                String chapter = ChapterName.getText().toString().trim();
+                                String subject = SubjectName.getText().toString().trim();
 
-                            // Hiding the progressDialog after done uploading.
-                            progressDialog.dismiss();
+                                // Hiding the progressDialog after done uploading.
+                                progressDialog.dismiss();
 
-                            // Showing toast message after done uploading.
-                            Toast.makeText(getApplicationContext(), "File Uploaded Successfully ", Toast.LENGTH_LONG).show();
-
-
-                            String file_data =  mCurrentUserId + "/" + subject + "/" + chapter;
+                                // Showing toast message after done uploading.
+                                Toast.makeText(getApplicationContext(), "File Uploaded Successfully ", Toast.LENGTH_LONG).show();
 
 
-//                            @SuppressWarnings("VisibleForTests")
-//                            ImageUploadInfo imageUploadInfo = new ImageUploadInfo(TempImageName,
-//                                    taskSnapshot.getDownloadUrl().toString());
+                                String file_data =  mCurrentUserId + "/" + subject + "/" + chapter;
 
-                            // Getting image upload ID.
-//                            String ImageUploadId = databaseReference.push().getKey();
 
-                            // Adding image upload id s child element into databaseReference.
-//                            databaseReference.child(ImageUploadId).setValue(imageUploadInfo);
+    //                            @SuppressWarnings("VisibleForTests")
+    //                            ImageUploadInfo imageUploadInfo = new ImageUploadInfo(TempImageName,
+    //                                    taskSnapshot.getDownloadUrl().toString());
 
-                            databaseReference.child(file_data).setValue(downloadUrl.toString(), new DatabaseReference.CompletionListener() {
-                                @Override
-                                public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                                // Getting image upload ID.
+    //                            String ImageUploadId = databaseReference.push().getKey();
 
-                                    if(databaseError != null){
+                                // Adding image upload id s child element into databaseReference.
+    //                            databaseReference.child(ImageUploadId).setValue(imageUploadInfo);
 
-                                        Log.d("CHAT_LOG", databaseError.getMessage().toString());
+                                databaseReference.child(file_data).setValue(downloadUrl.toString(), new DatabaseReference.CompletionListener() {
+                                    @Override
+                                    public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+
+                                        if(databaseError != null){
+
+                                            Log.d("CHAT_LOG", databaseError.getMessage().toString());
+
+                                        }
 
                                     }
+                                });
 
-                                }
-                            });
+                            }
+                        })
+                        // If something goes wrong .
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception exception) {
 
-                        }
-                    })
-                    // If something goes wrong .
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception exception) {
+                                // Hiding the progressDialog.
+                                progressDialog.dismiss();
 
-                            // Hiding the progressDialog.
-                            progressDialog.dismiss();
+                                // Showing exception erro message.
+                                Toast.makeText(UploadFile.this, exception.getMessage(), Toast.LENGTH_LONG).show();
+                            }
+                        })
 
-                            // Showing exception erro message.
-                            Toast.makeText(UploadFile.this, exception.getMessage(), Toast.LENGTH_LONG).show();
-                        }
-                    })
+                        // On progress change upload time.
+                        .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
 
-                    // On progress change upload time.
-                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                                // Setting progressDialog Title.
+                                progressDialog.setTitle("File is Uploading...");
 
-                            // Setting progressDialog Title.
-                            progressDialog.setTitle("Image is Uploading...");
-
-                        }
-                    });
-        }
+                            }
+                        });
+            }
+//        }
         else {
 
-            Toast.makeText(UploadFile.this, "Please Select Image or Add Image Name", Toast.LENGTH_LONG).show();
+            Toast.makeText(UploadFile.this, "Please Select File or Add Details", Toast.LENGTH_LONG).show();
 
         }
     }

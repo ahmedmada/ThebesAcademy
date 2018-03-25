@@ -13,6 +13,7 @@ import com.eaapps.thebesacademy.Files.ReadFilesDoctors;
 import com.eaapps.thebesacademy.Files.UploadFile;
 import com.eaapps.thebesacademy.Model.Profile;
 import com.eaapps.thebesacademy.Model.RetrieveData;
+import com.eaapps.thebesacademy.PDF.PdfListActivity;
 import com.eaapps.thebesacademy.R;
 import com.eaapps.thebesacademy.Utils.Constants;
 import com.eaapps.thebesacademy.Utils.EATextInputEditText;
@@ -55,6 +56,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         retrieveData = new RetrieveData<Profile>(Login.this) {
         };
 
+//        startActivity(new Intent(Login.this, PdfListActivity.class));
     }
 
     private void init() {
